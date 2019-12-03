@@ -16,12 +16,17 @@ export default {
   data() {
     return {
       list: [
-        {id:0,title:'first'},
-        {id:1,title:'second'},
-        {id:2,title:'third'},
-        {id:3,title:'forth'}
+        // {id:1,title:'first'},
+        // {id:2,title:'second'},
+        // {id:3,title:'third'},
+        // {id:4,title:'forth'}
       ]
     }
+  },
+  created() {
+    axios.get('https://jsonplaceholder.typicode.com/todos?_limit=10')
+    .then(res => this.list = res.data)
+    .catch(err => console.log(err));
   }
-}
+  }
 </script>

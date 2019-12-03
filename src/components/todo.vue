@@ -2,11 +2,11 @@
 <div class="todo">
     <h1>title is: {{ title }}</h1>
     <div class="todo__wrapper">
-      <input type="text" class="todo__input" v-model="text"  placeholder="Add todo....">
+      <input type="text" class="todo__input" v-model="text"  placeholder="Add todo...." @keyup.enter="addNewTodo" >
       <button class="todo__button" @click="addNewTodo">Add</button>
     </div>
     <ul class="todo__list">
-    <todoItem v-for="todo in todos" v-bind:key="todo.id" :todo="todo" ></todoItem>  
+    <todoItem v-for="todo in todos" v-bind:key="todo.id" :todo="todo" @deleteItem='deleteItem'></todoItem>  
   </ul>
 </div>
 </template>
@@ -22,13 +22,17 @@ export default {
   },
   methods: {
     addNewTodo: function () {
+      if(this.text.length === 0) return;
       // alert(this.title);
-      var ID = this.todos.length;
+      var ID = this.todos.length + 1;
       console.log("object is ");
       var ob = {id: ID, title: this.text}
       console.log(ob);
       this.todos.push(ob);
       this.text = '';
+    },
+    deleteItem(id) {
+     this.todos = this.todos.filter(item=>item.id != id);
     }
   },
   props: {
@@ -55,16 +59,20 @@ export default {
   }
 
   &__input {
+    font-size: 18px;
     border-radius: 10px;
     border: 2px solid black;
     display: inline-block;
+    min-width: 30%;
   }
 
   &__button {
+    font-size: 18px;
     height:100%;
     border: 2px solid black;
     background:rgba(blue, 0.1);
-    margin: 0 10px
+    margin: 20px;
+    box-shadow: 6px 5px 10px;
   }
 }
 </style>

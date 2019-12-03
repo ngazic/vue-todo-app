@@ -1,7 +1,7 @@
 <template>
   <li class="todo-item">
     <h1>{{  todo.id  }}.{{ todo.title }}</h1>
-  <button class="todo-item__button">X</button>
+  <button class="todo-item__button" @click="$emit('deleteItem',todo.id)" >X</button>
   </li>
 </template>
 
