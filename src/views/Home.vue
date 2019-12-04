@@ -7,6 +7,7 @@
 <script>
 // @ is an alias to /src
 import todo from '@/components/todo.vue'
+import axios from 'axios';
 
 export default {
   name: 'home',
